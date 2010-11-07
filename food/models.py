@@ -11,7 +11,7 @@ class Section(models.Model):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=64)
-    unit = models.CharField(max_length=64)
+    unit = models.CharField(max_length=64, blank=True)
     is_food = models.BooleanField()
     section = models.ForeignKey(Section)
 
