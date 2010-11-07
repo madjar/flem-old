@@ -2,6 +2,7 @@ from django.db import models
 
 from food.models import Ingredient
 from planning.models import Meal
+from django.db.models import permalink
 
 class ShoppingList(models.Model):
     date = models.DateField()
@@ -12,6 +13,9 @@ class ShoppingList(models.Model):
     def __unicode__(self):
         return str(self.date)
 
+    @permalink
+    def get_absolute_url(self):
+        return ('list.views.detail', [str(self.id)])
 
 class ExtraIngredient(models.Model):
     shopping_list = models.ForeignKey(ShoppingList)

@@ -1,0 +1,15 @@
+<h2>{{ list }}</h2>
+
+{% regroup ingredients by ingredient.section as section_list %}
+
+<ul>
+{% for section in section_list %}
+    <li>{{ section.grouper }}
+    <ul>
+        {% for item in section.list %}
+        <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+    </li>
+{% endfor %}
+</ul>
