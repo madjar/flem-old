@@ -4,7 +4,7 @@ from food.models import Ingredient
 from planning.models import Meal
 
 class ShoppingList(models.Model):
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     extra_ingredients = models.ManyToManyField(Ingredient, through='ExtraIngredient', related_name='extra_in_lists')
     not_needed_ingredients = models.ManyToManyField(Ingredient, through='NotNeededIngredient',
                                                     related_name='not_needed_in_lists')
@@ -15,17 +15,17 @@ class ShoppingList(models.Model):
 
 class ExtraIngredient(models.Model):
     shopping_list = models.ForeignKey(ShoppingList)
-    ingredient = models.ForeignKey(Ingredient)
     amount = models.FloatField()
+    ingredient = models.ForeignKey(Ingredient)
 
     def __unicode__(self):
-        return '%s %s'%(self.amount, self.ingredient)
+        return '%s %s %s'%(self.amount, self.ingredient.unit, self.ingredient)
 
 
 class NotNeededIngredient(models.Model):
     shopping_list = models.ForeignKey(ShoppingList)
-    ingredient = models.ForeignKey(Ingredient)
     amount = models.FloatField()
+    ingredient = models.ForeignKey(Ingredient)
 
     def __unicode__(self):
-        return '%s %s'%(self.amount, self.ingredient)
+        return '%s %s %s'%(self.amount, self.ingredient.unit, self.ingredient)
