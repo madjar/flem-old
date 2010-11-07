@@ -9,14 +9,23 @@ class ShoppingList(models.Model):
     not_needed_ingredients = models.ManyToManyField(Ingredient, through='NotNeededIngredient',
                                                     related_name='not_needed_in_lists')
 
+    def __unicode__(self):
+        return str(self.date)
+
 
 class ExtraIngredient(models.Model):
     shopping_list = models.ForeignKey(ShoppingList)
     ingredient = models.ForeignKey(Ingredient)
     amount = models.FloatField()
 
+    def __unicode__(self):
+        return '%s %s'%(self.amount, self.ingredient)
+
 
 class NotNeededIngredient(models.Model):
     shopping_list = models.ForeignKey(ShoppingList)
     ingredient = models.ForeignKey(Ingredient)
     amount = models.FloatField()
+
+    def __unicode__(self):
+        return '%s %s'%(self.amount, self.ingredient)
