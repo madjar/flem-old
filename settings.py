@@ -91,4 +91,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'south',
     'flem.food',
+    'flem.planning',
+    'flem.list',
 )
