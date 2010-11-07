@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from django.db.models import permalink
 
 class Section(models.Model):
     """Where you can find it in your supermarket"""
@@ -37,6 +36,10 @@ class Recipe(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    @permalink
+    def get_absolute_url(self):
+        return ('recipe_view', [str(self.id)])
 
 class Containment(models.Model):
     recipe = models.ForeignKey(Recipe)

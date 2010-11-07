@@ -1,0 +1,9 @@
+<h2>{{ recipe }}</h2>
+
+<p>{{ recipe.description }}</p>
+
+<ul>
+{% for c in recipe.containment_set.all %}
+<li> {{ c.amount }} {{ c.ingredient.unit }} {{ c.ingredient.name }}</li>
+{% endfor %}
+</ul>

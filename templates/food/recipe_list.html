@@ -1,0 +1,11 @@
+
+  <h2>Recipes</h2>
+  <div class="arrow" id="arrow-by-category"></div>
+        <ul id="recipe-list">
+    {% for r in recipe_list %}
+    <li>
+      <h3><a href="{{ r.get_absolute_url }}">{{ r }}</a></h3>
+    </li>
+    {% endfor %}
+  </ul>
+
