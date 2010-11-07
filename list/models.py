@@ -1,7 +1,6 @@
 from django.db import models
 
-from food.models import Ingredient
-from planning.models import Meal
+from food.models import Ingredient, IngredientAmount
 from django.db.models import permalink
 
 class ShoppingList(models.Model):
@@ -17,19 +16,9 @@ class ShoppingList(models.Model):
     def get_absolute_url(self):
         return ('list.views.detail', [str(self.id)])
 
-class ExtraIngredient(models.Model):
+class ExtraIngredient(IngredientAmount):
     shopping_list = models.ForeignKey(ShoppingList)
-    amount = models.FloatField()
-    ingredient = models.ForeignKey(Ingredient)
-
-    def __unicode__(self):
-        return '%s %s %s'%(self.amount, self.ingredient.unit, self.ingredient)
 
 
-class NotNeededIngredient(models.Model):
+class NotNeededIngredient(IngredientAmount):
     shopping_list = models.ForeignKey(ShoppingList)
-    amount = models.FloatField()
-    ingredient = models.ForeignKey(Ingredient)
-
-    def __unicode__(self):
-        return '%s %s %s'%(self.amount, self.ingredient.unit, self.ingredient)

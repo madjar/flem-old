@@ -41,7 +41,16 @@ class Recipe(models.Model):
     def get_absolute_url(self):
         return ('recipe_view', [str(self.id)])
 
-class Containment(models.Model):
-    recipe = models.ForeignKey(Recipe)
+
+class IngredientAmount(models.Model):
     ingredient = models.ForeignKey(Ingredient)
     amount = models.FloatField()
+
+    def __unicode__(self):
+        return '%s %s %s'%(self.amount, self.ingredient.unit, self.ingredient)
+
+    class Meta:
+        abstract = True
+
+class Containment(IngredientAmount):
+    recipe = models.ForeignKey(Recipe)
