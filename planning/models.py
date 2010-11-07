@@ -11,8 +11,8 @@ class Meal(models.Model):
     )
 
     date = models.DateField()
-    persons = models.IntegerField()
     time_of_day = models.CharField(max_length=1, choices=TIMES_CHOICES)
+    persons = models.IntegerField()
     recipes = models.ManyToManyField(Recipe)
     shopping_list = models.ForeignKey('list.ShoppingList', blank=True, related_name='meals')
 
