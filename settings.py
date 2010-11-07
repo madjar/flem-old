@@ -1,4 +1,5 @@
 # Django settings for flem project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -9,10 +10,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/home/madjar/dev/django/flem/flem.db',                      # Or path to database file if using sqlite3.
+        'NAME': os.path.join(PROJECT_PATH, 'flem.db'),                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -77,7 +80,7 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'flem.urls'
 
-TEMPLATE_DIRS = ('/home/madjar/dev/django/flem/templates',)
+TEMPLATE_DIRS = (os.path.join(PROJECT_PATH, 'templates'),)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
