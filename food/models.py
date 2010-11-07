@@ -43,8 +43,8 @@ class Recipe(models.Model):
 
 
 class IngredientAmount(models.Model):
-    ingredient = models.ForeignKey(Ingredient)
     amount = models.FloatField()
+    ingredient = models.ForeignKey(Ingredient)
 
     def __unicode__(self):
         return '%s %s %s'%(self.amount, self.ingredient.unit, self.ingredient)
