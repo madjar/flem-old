@@ -49,11 +49,6 @@ class IngredientAmount(models.Model):
     def __unicode__(self):
         return '%s %s %s'%(self.amount, self.ingredient.unit, self.ingredient)
 
-    def __mul__(self, n):
-        return IngredientAmount(amount=n*self.amount, ingredient=self.ingredient)
-
-    __rmul__ = __mul__
-
     class Meta:
         abstract = True
 

@@ -7,7 +7,7 @@
     <li>{{ section.grouper }}
     <ul>
         {% for item in section.list %}
-        <li>{{ item }}</li>
+        <li>{{ item.amount }} {{ item.ingredient.unit }} {{ item.ingredient.name }}</li>
         {% endfor %}
     </ul>
     </li>
