@@ -1,0 +1,18 @@
+
+<h2>Meals</h2>
+
+<p>Between {{ from }} and {{ to }}</p>
+
+<ul>
+  {% for m in meals %}
+  <li>
+      <p> {{ m }}, {{ m.persons }} persons</p>
+      <ul>
+          {% for recipe in m.recipes.all %}
+              <li> {{ recipe }} </li>
+          {% endfor %}
+      </ul>
+  </li>
+  {% endfor %}
+</ul>
+

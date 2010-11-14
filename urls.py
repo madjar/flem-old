@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^', include('food.urls')),
+    (r'^planning/', include('planning.urls')),
     (r'^shoppinglist/', include('list.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
