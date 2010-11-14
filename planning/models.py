@@ -13,7 +13,7 @@ class Meal(models.Model):
     date = models.DateField()
     time_of_day = models.CharField(max_length=1, choices=TIMES_CHOICES)
     persons = models.IntegerField()
-    recipes = models.ManyToManyField(Recipe)
+    recipes = models.ManyToManyField(Recipe, blank=True)
     shopping_list = models.ForeignKey('list.ShoppingList', blank=True, null=True, related_name='meals')
 
     def __unicode__(self):
