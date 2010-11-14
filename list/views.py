@@ -29,7 +29,7 @@ def detail(request, list_id):
             ingredients_dict[ia.ingredient] += ia.amount * meal.persons
 
     # Then, we sort the ingredients per section before giving it to the view.
-    ingredients = sorted((IngredientAmountTuple(k,v) for k, v in ingredients_dict.iteritems()),
+    ingredients = sorted((IngredientAmountTuple(k,v) for k, v in ingredients_dict.iteritems() if v != 0),
                          cmp=compareIngredientsPerSections,
                          key=attrgetter('ingredient')
                          )
