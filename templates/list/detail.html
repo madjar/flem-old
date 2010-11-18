@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <h2>{{ list }}</h2>
 
 {% regroup ingredients by ingredient.section as section_list %}
@@ -13,3 +17,4 @@
     </li>
 {% endfor %}
 </ul>
+{% endblock %}
