@@ -12,6 +12,8 @@ MANAGERS = ADMINS
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
+STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
