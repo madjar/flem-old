@@ -10,4 +10,6 @@
 <li> {{ c.amount }} {{ c.ingredient.unit }} {{ c.ingredient.name }}</li>
 {% endfor %}
 </ul>
+
+<a href="{% url food.views.recipe_edit recipe.id %}">Edit</a>
 {% endblock %}

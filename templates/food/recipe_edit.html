@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    Editing <a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ formset.management_form }}
+        <table>
+            <thead><tr>
+                <th>Amount</th>
+                <th>Ingredient</th>
+                <th>Supprimer ?</th>
+            </tr></thead>
+            <tbody>
+            {% for form in formset.forms %}
+                {{ form.id }}
+                <tr>
+                    <td>{{ form.amount }}</td>
+                    <td>{{ form.ingredient }}</td>
+                    <td>{{ form.DELETE }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}
