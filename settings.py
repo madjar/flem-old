@@ -14,6 +14,8 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 
+INTERNAL_IPS = ('127.0.0.1')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -99,3 +101,10 @@ INSTALLED_APPS = (
     'flem.planning',
     'flem.list',
 )
+
+try:
+    import debug_toolbar
+    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    INSTALLED_APPS += ('debug_toolbar',)
+except ImportError:
+    pass
