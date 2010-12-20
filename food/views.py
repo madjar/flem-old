@@ -8,12 +8,10 @@ def recipe_edit(request, id):
     IngredientFormset = inlineformset_factory(Recipe, Containment)
 
     recipe = get_object_or_404(Recipe, pk=id)
-    if request.method == 'POST': # If the form has been submitted...
-        form = RecipeForm(request.POST, instance=recipe) # A form bound to the POST data
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, instance=recipe)
         formset = IngredientFormset(request.POST, instance=recipe)
-        if form.is_valid() and formset.is_valid(): # All validation rules pass
-            # Process the data in form.cleaned_data
-            # ...
+        if form.is_valid() and formset.is_valid():
             recipe = form.save()
             formset.save()
             return redirect(recipe_edit, id=recipe.id)
