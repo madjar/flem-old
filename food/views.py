@@ -39,13 +39,15 @@ def recipe_ingredient_wizard(request, id):
             erase = ErasePreviousIngredientsForm(request.POST)
             if not result_formset.is_valid() or not erase.is_valid():
                 raise Exception('Did you just feed me with crappy input ?')
+            if erase.cleaned_data['erase']:
+                recipe.containment_set.all().delete()
             for ia in result_formset.cleaned_data:
                 # Adding the ingredient to the recipe
                 ingredient = Ingredient.objects.get(pk=ia['ingredient'])
                 c, created = Containment.objects.get_or_create(ingredient=ingredient,
                                                       recipe=recipe,
                                                       defaults={'amount': 0})
-                c.amount += int(ia['amount'])
+                c.amount += float(ia['amount'])
                 c.save()
             #TODO a little message to the user
             return redirect(recipe)
