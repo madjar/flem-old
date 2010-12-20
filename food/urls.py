@@ -11,7 +11,7 @@ recipe_info = {
 
 urlpatterns = patterns('',
     (r'^$', list_detail.object_list, recipe_info),
-    url(r'^(?P<object_id>\d+)/$', list_detail.object_detail, recipe_info, name='recipe_view'),
+    (r'^(?P<id>\d+)/$', recipe_detail),
     (r'^(?P<id>\d+)/edit/$', recipe_edit),
     (r'^(?P<id>\d+)/ingredientwizard/$', recipe_ingredient_wizard),
 

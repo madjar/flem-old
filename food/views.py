@@ -7,6 +7,18 @@ from food.utils import get_ingredient_amount_from_string
 from django.contrib import messages
 
 
+def recipe_detail(request, id):
+    recipe = get_object_or_404(Recipe, pk=id)
+    containment = recipe.containment_set.all().select_related('ingredient')
+
+    return render_to_response('food/recipe_detail.html',
+                              {
+                                  'recipe': recipe,
+                                  'containment': containment,
+                              },
+                              context_instance=RequestContext(request))
+
+
 def recipe_edit(request, id):
     IngredientFormset = inlineformset_factory(Recipe, Containment)
 

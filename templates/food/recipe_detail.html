@@ -6,7 +6,7 @@
 <p>{{ recipe.description }}</p>
 
 <ul>
-{% for c in recipe.containment_set.all %}
+{% for c in containment %}
 <li> {{ c.amount }} {{ c.ingredient.unit }} {{ c.ingredient.name }}</li>
 {% endfor %}
 </ul>

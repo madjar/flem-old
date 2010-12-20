@@ -40,7 +40,7 @@ class Recipe(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return ('recipe_view', [str(self.id)])
+        return ('food.views.recipe_detail', [str(self.id)])
 
 
 class IngredientAmount(models.Model):
