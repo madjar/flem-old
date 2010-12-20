@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import permalink
+from django.template.defaultfilters import floatformat
 
 class Section(models.Model):
     """Where you can find it in your supermarket"""
@@ -47,7 +48,7 @@ class IngredientAmount(models.Model):
     ingredient = models.ForeignKey(Ingredient)
 
     def __unicode__(self):
-        return '%s %s %s'%(self.amount, self.ingredient.unit, self.ingredient)
+        return '%s %s %s'%(floatformat(self.amount), self.ingredient.unit, self.ingredient)
 
     class Meta:
         abstract = True
