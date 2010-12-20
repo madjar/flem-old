@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template.context import RequestContext
 from django.forms.models import inlineformset_factory
 from food.utils import get_ingredient_amount_from_string
+from django.contrib import messages
+
 
 def recipe_edit(request, id):
     IngredientFormset = inlineformset_factory(Recipe, Containment)
@@ -15,6 +17,7 @@ def recipe_edit(request, id):
         if form.is_valid() and formset.is_valid():
             recipe = form.save()
             formset.save()
+            messages.success(request, 'Recipe updated.')
             return redirect(recipe_edit, id=recipe.id)
 
     else:
@@ -49,7 +52,7 @@ def recipe_ingredient_wizard(request, id):
                                                       defaults={'amount': 0})
                 c.amount += float(ia['amount'])
                 c.save()
-            #TODO a little message to the user
+            messages.success(request, 'Ingredients updated.')
             return redirect(recipe)
         else:
             form = IngredientWizardForm(request.POST)
