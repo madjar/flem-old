@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="input_form" >
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Parse" />
+        </form>
+    </div>
+    {% if result %}
+
+        <div id="results">
+            Ingredients to be added :
+            <ul>
+                {% for line in result %}
+                    <li>{{ line }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="save_form">
+            <form action="?save=1" method="post">
+                {% csrf_token %}
+                {{ result_formset }}
+                {% if ingredients_to_erase %}
+                    <div id="erase">
+                    {{ erase.as_p }}
+                    <p>These ingredients would be erased :</p>
+                    <ul>
+                        {% for ia in ingredients_to_erase %}
+                            <li>{{ ia }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </div>
+                <input type="submit" value="Save" />
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
