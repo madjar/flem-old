@@ -17,7 +17,10 @@ class Ingredient(models.Model):
     section = models.ForeignKey(Section)
 
     def __unicode__(self):
-        return self.name
+        if self.unit:
+            return '%s (%s)'%(self.name, self.unit)
+        else:
+            return self.name
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
@@ -48,7 +51,7 @@ class IngredientAmount(models.Model):
     ingredient = models.ForeignKey(Ingredient)
 
     def __unicode__(self):
-        return '%s %s %s'%(floatformat(self.amount), self.ingredient.unit, self.ingredient)
+        return '%s %s %s'%(floatformat(self.amount), self.ingredient.unit, self.ingredient.name)
 
     class Meta:
         abstract = True
