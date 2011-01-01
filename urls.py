@@ -8,7 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^', include('food.urls')),
     (r'^planning/', include('planning.urls')),
-    (r'^shoppinglist/', include('list.urls')),
+    (r'^shoppinglist/', include('lists.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

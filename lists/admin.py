@@ -1,5 +1,5 @@
 from django.contrib import admin
-from list.models import ShoppingList, ExtraIngredient, NotNeededIngredient
+from lists.models import ShoppingList, ExtraIngredient, NotNeededIngredient
 from planning.models import Meal
 
 class MealInline(admin.TabularInline):

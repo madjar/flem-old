@@ -14,7 +14,7 @@ class ShoppingList(models.Model):
 
     @permalink
     def get_absolute_url(self):
-        return ('list.views.detail', [str(self.id)])
+        return 'lists.views.detail', [str(self.id)]
 
 class ExtraIngredient(IngredientAmount):
     shopping_list = models.ForeignKey(ShoppingList)

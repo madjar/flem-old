@@ -20,7 +20,7 @@ class Migration(SchemaMigration):
         db.create_table('food_ingredient', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('unit', self.gf('django.db.models.fields.CharField')(max_length=64)),
+            ('unit', self.gf('django.db.models.fields.CharField')(max_length=64, blank=True)),
             ('is_food', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('section', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['food.Section'])),
         ))
@@ -45,9 +45,9 @@ class Migration(SchemaMigration):
         # Adding model 'Containment'
         db.create_table('food_containment', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('recipe', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['food.Recipe'])),
-            ('ingredient', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['food.Ingredient'])),
             ('amount', self.gf('django.db.models.fields.FloatField')()),
+            ('ingredient', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['food.Ingredient'])),
+            ('recipe', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['food.Recipe'])),
         ))
         db.send_create_signal('food', ['Containment'])
 
@@ -89,7 +89,7 @@ class Migration(SchemaMigration):
             'is_food': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
             'section': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['food.Section']"}),
-            'unit': ('django.db.models.fields.CharField', [], {'max_length': '64'})
+            'unit': ('django.db.models.fields.CharField', [], {'max_length': '64', 'blank': 'True'})
         },
         'food.recipe': {
             'Meta': {'object_name': 'Recipe'},

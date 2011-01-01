@@ -1,7 +1,6 @@
 from django.conf.urls.defaults import *
-from list.models import ShoppingList
 
-urlpatterns = patterns('list.views',
+urlpatterns = patterns('lists.views',
     url(r'^(\d+)/$', 'detail'),
 
 )

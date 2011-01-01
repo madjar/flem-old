@@ -34,4 +34,4 @@ def detail(request, list_id):
                          key=attrgetter('ingredient')
                          )
 
-    return render_to_response('list/detail.html', {'list': shopping_list, 'ingredients': ingredients})
+    return render_to_response('lists/detail.html', {'list': shopping_list, 'ingredients': ingredients})

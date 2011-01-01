@@ -99,7 +99,7 @@ INSTALLED_APPS = (
     'south',
     'flem.food',
     'flem.planning',
-    'flem.list',
+    'flem.lists',
 )
 
 try:
