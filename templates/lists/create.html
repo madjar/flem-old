@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if already_assigned_meals %}
+            <p>Some meals in that range already are in other lists, confirming the action will steal them.</p>
+            {% regroup already_assigned_meals by shopping_list as lists %}
+
+            <ul>
+                {% for shopping_list in lists %}
+                    <li>Shopping list : {{ shopping_list.grouper }}
+                        <ul>
+                            {% for meal in shopping_list.list %}
+                                <li>{{ meal }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

@@ -53,6 +53,7 @@ class ShoppingList(models.Model):
 
         moments = itertools.ifilter(lambda x: x not in existing_moments, moments)
 
+        # TODO find a way to create all those meals in a single query
         for date, time_of_day in moments:
             meal = Meal(date=date, time_of_day=time_of_day, persons=0, shopping_list=shopping_list)
             meal.save()

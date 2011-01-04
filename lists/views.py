@@ -1,7 +1,11 @@
+import hashlib
+from django.template.context import RequestContext
+from django.contrib import messages
+from lists.forms import ListCreateForm
 from models import ShoppingList
 from food.models import Containment
 
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response, get_object_or_404, redirect
 from collections import defaultdict, namedtuple
 from operator import attrgetter
 
@@ -35,3 +39,49 @@ def detail(request, list_id):
                          )
 
     return render_to_response('lists/detail.html', {'list': shopping_list, 'ingredients': ingredients})
+
+
+def create(request):
+    already_assigned_meals = None
+    if request.method == 'POST':
+        form = ListCreateForm(request.POST)
+        if form.is_valid():
+            shopping_list = None
+            try:
+                from_date = form.cleaned_data['from_date']
+                to_date = form.cleaned_data['to_date']
+                date = form.cleaned_data['date']
+                shopping_list = ShoppingList.create_for_range(from_date,
+                                                              to_date)
+                shopping_list.date = date
+                shopping_list.save()
+            except ShoppingList.RangeNotEmptyException as e:
+                override_hash = hashlib.sha1('%s%s%s'%(date.ctime(),
+                                                       from_date.ctime(),
+                                                       to_date.ctime())
+                                             ).hexdigest()
+                if form.cleaned_data['override'] == override_hash:
+                    shopping_list = ShoppingList.create_for_range(from_date,
+                                                                  to_date,
+                                                                  override=True)
+                    shopping_list.date = date
+                    shopping_list.save()
+                else:
+                    form.data = form.data.copy()
+                    form.data['override'] = override_hash
+                    already_assigned_meals = e[0].select_related('shopping_list')
+
+            if shopping_list:
+                messages.success(request, 'Shopping list created updated.')
+                return redirect(shopping_list)
+
+    else:
+        form = ListCreateForm()
+
+    dict = {
+        'form': form,
+        'already_assigned_meals': already_assigned_meals,
+    }
+    return render_to_response('lists/create.html',
+                              dict,
+                              context_instance=RequestContext(request))
